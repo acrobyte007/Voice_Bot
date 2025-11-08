@@ -1,53 +1,41 @@
 import streamlit as st
 import asyncio
+import os
 from llm_response import get_response
 from male_voice import text_to_speech
-from audio_text import transcribe_audio
 
+st.set_page_config(page_title="Ajoy Prasad Bot", layout="centered")
 st.title("Bot on behalf of Ajoy Prasad")
 
-
-tab_text, tab_voice = st.tabs(["Type Your Question", "Speak Your Question"])
-
+tab_text, tab_voice = st.tabs(["Type Your Question", "Voice Input (Coming Soon)"])
 
 with tab_text:
     user_input = st.text_input(
         "Type your question and press Enter:",
         placeholder="Ask Ajoy anything...",
-        key="text_input"
+        key="text_input",
+        label_visibility="collapsed"
     )
 
     if user_input:
         with st.spinner("Ajoy is thinking..."):
-            response = asyncio.run(get_response(user_input))
-            asyncio.run(text_to_speech(response, "response.wav"))
+            try:
+                response = asyncio.run(get_response(user_input))
+                audio_file = "response.wav"
+                asyncio.run(text_to_speech(response, audio_file))
 
-        st.audio("response.wav", format="audio/wav", autoplay=True)
-        st.markdown("**Ajoy's Answer:**")
-        st.write(response)
+                if os.path.exists(audio_file):
+                    st.audio(audio_file, format="audio/wav", autoplay=True)
+                else:
+                    st.warning("Audio file not generated.")
 
+                st.markdown("### **Ajoy's Answer:**")
+                st.write(response)
+
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+                st.info("Please try again with a different question.")
 
 with tab_voice:
-    if st.button("Speak Now", type="primary", use_container_width=True):
-        with st.spinner("Recording..."):
-            audio_bytes = st.experimental_audio_input(
-                "Speak your question... (click when done)",
-                key="voice_input"
-            )
-
-        if audio_bytes:
-            audio_file = "user_question.wav"
-            with open(audio_file, "wb") as f:
-                f.write(audio_bytes)
-
-            with st.spinner("Ajoy is listening and answering..."):
-                response_text, response_audio_path = asyncio.run(
-                    transcribe_audio(audio_file)
-                )
-
-            if response_text and response_audio_path:
-                st.audio(response_audio_path, format="audio/wav", autoplay=True)
-                st.markdown("**Ajoy's Answer:**")
-                st.write(response_text)
-            else:
-                st.error("Couldn't process your voice. Try again.")
+    st.info("Voice input feature coming soon!")
+    st.write("You'll be able to speak your question directly to Ajoy.")

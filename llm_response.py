@@ -37,7 +37,7 @@ Professional Summary:
 Education:
 - M.Tech (Artificial Intelligence, CSE) — NIT Bhopal (2023–2025), CGPA 7.00
 - B.Tech (Mechanical Engineering) — St. Mary’s Technical Campus Kolkata (2018–2022), CGPA 8.32
-
+-M.Tech is completed at june 2025
 Technical Skills:
 - Languages: Python, C++
 - Specializations: Python Development, NLP, Machine Learning, Deep Learning, Generative AI, OCR
@@ -47,10 +47,11 @@ Technical Skills:
 - Platforms: Git, AWS
 
 Experience:
-AI Engineer — Gravitas AI (July 2025 – November 2025)
+AI Engineer — Gravitas AI (1st July 2025 – 4th November 2025)
 - Built a multilingual (Hindi + English) document-based RAG chatbot with OCR, web-scraped inputs, and Pinecone semantic retrieval with inline citations.
 - Implemented a local serverless setup with API Gateway, JWT Authentication, and AWS SES for secure access.
 - Managed document storage on AWS S3 and user data (profiles, chats, plans, usage limits) using PostgreSQL.
+- Due to the requirement of the company,The postion is closed for me.
 
 Projects:
 1. AI Interview Assistant (May 2025) — GitHub: acrobyte007/Agentic_AI
